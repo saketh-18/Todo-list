@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [list , setList] = useState();
+  const [items , setItems] = useState(["Add" , "Tasks" , "to Your", "List"]);
+
+  function handleclick(event){
+    event.preventDefault();
+    setItems((prev) =>
+      [...prev , list]
+     )
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='todo flex' >
+      <h1 className = "heading"> Todo List </h1> 
+      <div className = "container flex">
+       <div className='addItem flex'>
+        <form>
+          <input name='newItem' className=  "input" placeholder='Add a new item' value={list} onChange={(e) => {setList(e.target.value)}} />
+          <button className='add-button' onClick={handleclick} >Add</button> 
+        </form>
+       </div>
+        {items.map((item) => {return <p>{item}</p>})}
+      </div>
     </div>
   );
+
 }
 
 export default App;
